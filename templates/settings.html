@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Data Analysis Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Include Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .settings-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .settings-section {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .settings-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: hsla(var(--primary), 0.3);
+        }
+        .settings-group {
+            margin-bottom: 2rem;
+        }
+        .settings-group:last-child {
+            margin-bottom: 0;
+        }
+        .settings-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        .settings-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .settings-item-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .settings-item-label ion-icon {
+            color: hsl(var(--primary));
+            font-size: 1.5rem;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: hsl(var(--primary));
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        select, input[type="text"], input[type="email"], input[type="password"] {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: white;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .button-primary {
+            background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+            color: white;
+        }
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <ul class="navbar-items flexbox-col">
+            <li class="navbar-logo flexbox-left">
+                <a class="navbar-item-inner flexbox">
+                    <img src="images/analysis.svg" alt="Logo" width="30" height="30">
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="index.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="stats-chart-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Home</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="analysis.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="analytics-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Analytics</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="plot.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="bar-chart-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Charts</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="/reports">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Reports</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="settings.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Settings</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="about.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">About Us</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="main" style="margin-left: 5em; padding: 2em;">
+        <div class="settings-container">
+            <h1>Settings</h1>
+            
+            <div class="settings-section">
+                <h2>Account Settings</h2>
+                <div class="settings-group">
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <ion-icon name="person-outline"></ion-icon>
+                            <span>Profile Information</span>
+                        </div>
+                        <button class="button button-secondary">Edit</button>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            <span>Change Password</span>
+                        </div>
+                        <button class="button button-secondary">Update</button>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <ion-icon name="notifications-outline"></ion-icon>
+                            <span>Email Notifications</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>Display Settings</h2>
+                <div class="settings-group">
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <ion-icon name="moon-outline"></ion-icon>
+                            <span>Dark Mode</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <ion-icon name="language-outline"></ion-icon>
+                            <span>Language</span>
+                        </div>
+                        <select>
+                            <option>English</option>
+                            <option>Spanish</option>
+                            <option>French</option>
+                            <option>German</option>
+                        </select>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <span>Time Zone</span>
+                        </div>
+                        <select>
+                            <option>UTC</option>
+                            <option>EST</option>
+                            <option>PST</option>
+                            <option>GMT</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>Data Settings</h2>
+                <div class="settings-group">
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <ion-icon name="cloud-upload-outline"></ion-icon>
+                            <span>Auto-save Data</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <ion-icon name="trash-outline"></ion-icon>
+                            <span>Data Retention Period</span>
+                        </div>
+                        <select>
+                            <option>30 days</option>
+                            <option>60 days</option>
+                            <option>90 days</option>
+                            <option>1 year</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="button button-primary">Save Changes</button>
+                <button class="button button-secondary">Reset to Default</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

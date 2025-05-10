@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis - Advanced Analytics</title>
+    <!-- Include Plotly.js -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Include Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Include Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav id="navbar">
+        <ul class="navbar-items flexbox-col">
+            <li class="navbar-logo flexbox-left">
+                <a class="navbar-item-inner flexbox">
+                    <img src="images/analysis.svg" alt="Logo" width="30" height="30">
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="index.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="stats-chart-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Home</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="analysis.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="analytics-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Analytics</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="plot.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="bar-chart-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Charts</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="/reports">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Reports</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="settings.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Settings</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="about.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">About Us</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="main" style="margin-left: 5em; padding: 2em;">
+        <div class="data-card">
+            <h2>Advanced Analytics</h2>
+            <div class="flexbox-space-bet">
+                <div>
+                    <div class="data-label">Analysis Types</div>
+                    <div class="data-metric">4</div>
+                </div>
+                <div>
+                    <div class="data-label">Last Updated</div>
+                    <div class="data-metric">Today</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container"></div>
+            <h3>Heatmap Analysis</h3>
+            <div id="heatmap"></div>
+        </div>
+
+        <div class="chart-container">
+            <h3>Box Plot Distribution</h3>
+            <div id="boxPlot"></div>
+        </div>
+
+        <div class="chart-container">
+            <h3>3D Surface Plot</h3>
+            <div id="surfacePlot"></div>
+        </div>
+
+        <div class="chart-container">
+            <h3>Pie Chart Distribution</h3>
+            <div id="pieChart"></div>
+        </div>
+    </main>
+
+    <script>
+        // Common layout settings
+        const commonLayout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: {
+                color: '#ffffff'
+            },
+            xaxis: {
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.1)'
+            },
+            yaxis: {
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.1)'
+            }
+        };
+
+        // Heatmap
+        const heatmapData = {
+            z: [
+                [1, 20, 30, 50, 1],
+                [20, 1, 60, 80, 30],
+                [30, 60, 1, -10, 20],
+                [50, 80, -10, 1, 40],
+                [1, 30, 20, 40, 1]
+            ],
+            type: 'heatmap',
+            colorscale: 'Viridis'
+        };
+
+        Plotly.newPlot('heatmap', [heatmapData], {
+            ...commonLayout,
+            title: 'Correlation Matrix'
+        });
+
+        // Box Plot
+        const boxData = {
+            y: [
+                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            ],
+            type: 'box',
+            name: 'Sample Data',
+            boxpoints: 'all',
+            jitter: 0.3,
+            pointpos: -1.8,
+            marker: {
+                color: '#00bfff'
+            }
+        };
+
+        Plotly.newPlot('boxPlot', [boxData], {
+            ...commonLayout,
+            title: 'Data Distribution'
+        });
+
+        // 3D Surface Plot
+        const surfaceData = {
+            z: [
+                [1, 2, 3, 4, 5],
+                [2, 3, 4, 5, 6],
+                [3, 4, 5, 6, 7],
+                [4, 5, 6, 7, 8],
+                [5, 6, 7, 8, 9]
+            ],
+            type: 'surface',
+            colorscale: 'Viridis'
+        };
+
+        Plotly.newPlot('surfacePlot', [surfaceData], {
+            ...commonLayout,
+            title: '3D Surface Analysis',
+            scene: {
+                xaxis: {
+                    gridcolor: 'rgba(255,255,255,0.1)',
+                    linecolor: 'rgba(255,255,255,0.1)'
+                },
+                yaxis: {
+                    gridcolor: 'rgba(255,255,255,0.1)',
+                    linecolor: 'rgba(255,255,255,0.1)'
+                },
+                zaxis: {
+                    gridcolor: 'rgba(255,255,255,0.1)',
+                    linecolor: 'rgba(255,255,255,0.1)'
+                }
+            }
+        });
+
+        // Pie Chart
+        const pieData = {
+            values: [19, 26, 55],
+            labels: ['Category A', 'Category B', 'Category C'],
+            type: 'pie',
+            marker: {
+                colors: ['#00bfff', '#1e90ff', '#87cefa']
+            }
+        };
+
+        Plotly.newPlot('pieChart', [pieData], {
+            ...commonLayout,
+            title: 'Category Distribution'
+        });
+    </script>
+</body>
+</html> 

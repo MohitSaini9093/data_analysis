@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Data Analysis Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Include Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-section {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .about-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: hsla(var(--primary), 0.3);
+        }
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+        .features-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .features-list li:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        .features-list ion-icon {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: hsl(var(--primary));
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .team-member {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .team-member:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+            border: 2px solid hsla(var(--primary), 0.3);
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: hsl(var(--text-secondary));
+        }
+        .contact-info ion-icon {
+            color: hsl(var(--primary));
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            color: hsl(var(--text-secondary));
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <ul class="navbar-items flexbox-col">
+            <li class="navbar-logo flexbox-left">
+                <a class="navbar-item-inner flexbox">
+                    <img src="images/analysis.svg" alt="Logo" width="30" height="30">
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="index.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="stats-chart-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Home</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="analysis.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="analytics-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Analytics</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="plot.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="bar-chart-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Charts</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="/reports">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Reports</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="settings.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Settings</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="about.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">About Us</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="main" style="margin-left: 5em; padding: 2em;">
+        <div class="about-container">
+            <h1>About Data Analysis Dashboard</h1>
+            
+            <div class="about-section">
+                <h2>Our Mission</h2>
+                <p>We provide powerful data analysis tools to help businesses and individuals make data-driven decisions. Our dashboard offers comprehensive analytics, visualization, and reporting capabilities to transform raw data into actionable insights.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>Features</h2>
+                <ul class="features-list">
+                    <li>
+                        <ion-icon name="analytics-outline"></ion-icon>
+                        <span>Real-time data analytics with advanced algorithms</span>
+                    </li>
+                    <li>
+                        <ion-icon name="bar-chart-outline"></ion-icon>
+                        <span>Interactive visualizations and customizable dashboards</span>
+                    </li>
+                    <li>
+                        <ion-icon name="document-text-outline"></ion-icon>
+                        <span>Automated report generation and scheduling</span>
+                    </li>
+                    <li>
+                        <ion-icon name="cloud-upload-outline"></ion-icon>
+                        <span>Secure data import/export with multiple format support</span>
+                    </li>
+                    <li>
+                        <ion-icon name="shield-checkmark-outline"></ion-icon>
+                        <span>Enterprise-grade security and data protection</span>
+                    </li>
+                    <li>
+                        <ion-icon name="people-outline"></ion-icon>
+                        <span>Collaborative workspace for team analysis</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h2>Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="images/team1.jpg" alt="Team Member">
+                        <h3>John Smith</h3>
+                        <p>CEO & Founder</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="images/team2.jpg" alt="Team Member">
+                        <h3>Sarah Johnson</h3>
+                        <p>Data Science Lead</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="images/team3.jpg" alt="Team Member">
+                        <h3>Michael Chen</h3>
+                        <p>Product Manager</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="images/team4.jpg" alt="Team Member">
+                        <h3>Emily Davis</h3>
+                        <p>UX Designer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>Contact Us</h2>
+                <p>Have questions or need support? Our team is here to help you succeed with your data analysis needs.</p>
+                <div class="contact-info">
+                    <p><ion-icon name="mail-outline"></ion-icon> support@dataanalysis.com</p>
+                    <p><ion-icon name="call-outline"></ion-icon> +1 (555) 123-4567</p>
+                    <p><ion-icon name="location-outline"></ion-icon> 123 Data Street, Tech City, TC 12345</p>
+                    <p><ion-icon name="time-outline"></ion-icon> Monday - Friday: 9:00 AM - 6:00 PM EST</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html> 

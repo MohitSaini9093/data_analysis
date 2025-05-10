@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background circle -->
+    <circle cx="15" cy="15" r="14" fill="#000000" fill-opacity="0.1"/>
+    
+    <!-- Graph lines -->
+    <path d="M8 22L12 18L15 21L22 14" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Data points -->
+    <circle cx="12" cy="18" r="2" fill="#000000"/>
+    <circle cx="15" cy="21" r="2" fill="#000000"/>
+    <circle cx="22" cy="14" r="2" fill="#000000"/>
+    
+    <!-- Chart bars -->
+    <rect x="8" y="12" width="3" height="8" fill="#000000"/>
+    <rect x="13" y="8" width="3" height="12" fill="#000000"/>
+    <rect x="18" y="10" width="3" height="10" fill="#000000"/>
+</svg> 

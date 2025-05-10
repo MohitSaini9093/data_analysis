@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis - Plots</title>
+    <!-- Include Plotly.js -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Include Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Include Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav id="navbar">
+        <ul class="navbar-items flexbox-col">
+            <li class="navbar-logo flexbox-left">
+                <a class="navbar-item-inner flexbox">
+                    <img src="images/analysis.svg" alt="Logo" width="30" height="30">
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="index.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="stats-chart-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Home</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="analysis.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="analytics-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Analytics</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="plot.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="bar-chart-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Charts</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="/reports">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Reports</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="settings.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Settings</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" href="about.html">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">About Us</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="main" style="margin-left: 5em; padding: 2em;">
+        <div class="data-card">
+            <h2>Interactive Plots</h2>
+            <div class="flexbox-space-bet">
+                <div>
+                    <div class="data-label">Total Plots</div>
+                    <div class="data-metric">3</div>
+                </div>
+                <div>
+                    <div class="data-label">Last Updated</div>
+                    <div class="data-metric">Today</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3>Sample Line Plot</h3>
+            <div id="linePlot"></div>
+        </div>
+
+        <div class="chart-container">
+            <h3>Sample Bar Chart</h3>
+            <div id="barPlot"></div>
+        </div>
+
+        <div class="chart-container">
+            <h3>Sample Scatter Plot</h3>
+            <div id="scatterPlot"></div>
+        </div>
+    </main>
+
+    <script>
+        // Line Plot
+        const lineData = {
+            x: [1, 2, 3, 4, 5],
+            y: [1, 3, 2, 4, 3],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'Sample Line',
+            line: {
+                color: '#00bfff',
+                width: 2
+            },
+            marker: {
+                color: '#00bfff',
+                size: 8
+            }
+        };
+
+        const lineLayout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: {
+                color: '#ffffff'
+            },
+            xaxis: {
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.1)'
+            },
+            yaxis: {
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.1)'
+            }
+        };
+
+        Plotly.newPlot('linePlot', [lineData], lineLayout);
+
+        // Bar Chart
+        const barData = {
+            x: ['A', 'B', 'C', 'D', 'E'],
+            y: [20, 14, 23, 15, 12],
+            type: 'bar',
+            marker: {
+                color: '#00bfff'
+            }
+        };
+
+        const barLayout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: {
+                color: '#ffffff'
+            },
+            xaxis: {
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.1)'
+            },
+            yaxis: {
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.1)'
+            }
+        };
+
+        Plotly.newPlot('barPlot', [barData], barLayout);
+
+        // Scatter Plot
+        const scatterData = {
+            x: [1, 2, 3, 4, 5],
+            y: [1, 3, 2, 4, 3],
+            mode: 'markers',
+            type: 'scatter',
+            marker: {
+                color: '#00bfff',
+                size: 12
+            }
+        };
+
+        const scatterLayout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: {
+                color: '#ffffff'
+            },
+            xaxis: {
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.1)'
+            },
+            yaxis: {
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.1)'
+            }
+        };
+
+        Plotly.newPlot('scatterPlot', [scatterData], scatterLayout);
+    </script>
+</body>
+</html> 
