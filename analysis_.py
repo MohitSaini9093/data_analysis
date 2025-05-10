@@ -29,7 +29,15 @@ class Analysis:
     def info_column(self,column_name):
         return self.data[column_name].info()
     def describe_column(self,column_name):
-        return self.data[column_name].describe()
+        describe={"count": self.data[column_name].count(),
+                 "mean": self.data[column_name].mean(),
+                 "std": self.data[column_name].std(),
+                 "min": self.data[column_name].min(),
+                 "25%": self.data[column_name].quantile(0.25),
+                 "50%": self.data[column_name].median(),
+                 "75%": self.data[column_name].quantile(0.75),
+                 "max": self.data[column_name].max()}
+        return describe
     def group_by(self, column):
         if column not in self.data.columns:
             raise ValueError(f"Column '{column}' does not exist in the data")

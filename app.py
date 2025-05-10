@@ -206,6 +206,8 @@ def analysis(operation):
             if not column_name:
                 return jsonify({'error': 'Missing column name'}), 400
             describe_ = analysis_obj.describe_column(column_name)
+            print(f"Describing column: {column_name}")
+            print(describe_)
             return jsonify({
                 'describe': describe_
             })
