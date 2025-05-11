@@ -306,7 +306,7 @@ function sortColumn(columnName, direction) {
     });
 }
 
-function describeColumn(columnName) {
+async function describeColumn(columnName) {
     if (!columnName) {
         console.error('Column name is required');
         return;
@@ -345,7 +345,9 @@ function describeColumn(columnName) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            return response.json().then(err => {
+                throw new Error(err.error || 'Failed to get column statistics');
+            });
         }
         return response.json();
     })
@@ -353,7 +355,7 @@ function describeColumn(columnName) {
         // Remove loading modal
         document.body.removeChild(loadingModal);
 
-        if (!result || Object.keys(result).length === 0) {
+        if (!result || !result.describe) {
             throw new Error('No statistics available for this column');
         }
 
@@ -418,7 +420,7 @@ function describeColumn(columnName) {
         };
 
         // Format the statistics
-        const stats = Object.entries(result).map(([key, value]) => {
+        const stats = Object.entries(result.describe).map(([key, value]) => {
             return `
                 <div style="
                     display: flex;
@@ -499,7 +501,7 @@ function describeColumn(columnName) {
             document.body.removeChild(loadingModal);
         }
         console.error('Error describing column:', error);
-        alert('Error describing column: ' + error.message);
+        alert(error.message || 'Error describing column');
     });
 }
 

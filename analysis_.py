@@ -29,14 +29,60 @@ class Analysis:
     def info_column(self,column_name):
         return self.data[column_name].info()
     def describe_column(self,column_name):
-        describe={"count": self.data[column_name].count(),
-                 "mean": self.data[column_name].mean(),
-                 "std": self.data[column_name].std(),
-                 "min": self.data[column_name].min(),
-                 "25%": self.data[column_name].quantile(0.25),
-                 "50%": self.data[column_name].median(),
-                 "75%": self.data[column_name].quantile(0.75),
-                 "max": self.data[column_name].max()}
+        if column_name not in self.data.columns:
+            raise ValueError(f"Column '{column_name}' does not exist in the data")
+            
+        # Get the data type of the column
+        dtype = self.data[column_name].dtype
+        
+        # Handle numeric columns
+        if pd.api.types.is_numeric_dtype(self.data[column_name]):
+            describe = {
+                "count": float(self.data[column_name].count()),
+                "mean": float(self.data[column_name].mean()),
+                "std": float(self.data[column_name].std()),
+                "min": float(self.data[column_name].min()),
+                "25%": float(self.data[column_name].quantile(0.25)),
+                "50%": float(self.data[column_name].median()),
+                "75%": float(self.data[column_name].quantile(0.75)),
+                "max": float(self.data[column_name].max())
+            }
+        # Handle object/string columns
+        elif pd.api.types.is_object_dtype(self.data[column_name]):
+            value_counts = self.data[column_name].value_counts()
+            describe = {
+                "count": float(self.data[column_name].count()),
+                "unique_values": float(self.data[column_name].nunique()),
+                "most_common": value_counts.head(5).to_dict(),
+                "least_common": value_counts.tail(5).to_dict(),
+                "missing_values": float(self.data[column_name].isna().sum()),
+                "memory_usage": float(self.data[column_name].memory_usage(deep=True))
+            }
+        # Handle datetime columns
+        elif pd.api.types.is_datetime64_dtype(self.data[column_name]):
+            describe = {
+                "count": float(self.data[column_name].count()),
+                "min_date": str(self.data[column_name].min()),
+                "max_date": str(self.data[column_name].max()),
+                "missing_values": float(self.data[column_name].isna().sum()),
+                "unique_dates": float(self.data[column_name].nunique())
+            }
+        # Handle boolean columns
+        elif pd.api.types.is_bool_dtype(self.data[column_name]):
+            value_counts = self.data[column_name].value_counts()
+            describe = {
+                "count": float(self.data[column_name].count()),
+                "true_count": float(value_counts.get(True, 0)),
+                "false_count": float(value_counts.get(False, 0)),
+                "missing_values": float(self.data[column_name].isna().sum())
+            }
+        else:
+            describe = {
+                "count": float(self.data[column_name].count()),
+                "dtype": str(dtype),
+                "missing_values": float(self.data[column_name].isna().sum())
+            }
+            
         return describe
     def group_by(self, column):
         if column not in self.data.columns:
@@ -87,6 +133,18 @@ class Analysis:
             raise ValueError(f"Column '{old_name}' does not exist in the data")
         self.data = self.data.rename(columns={old_name: new_name})
         return self.data
+
+    def cleanup(self):
+        """Clear all data and free memory"""
+        if hasattr(self, 'data'):
+            del self.data
+        # Force garbage collection
+        import gc
+        gc.collect()
+
+    def __del__(self):
+        """Destructor to ensure cleanup when object is deleted"""
+        self.cleanup()
 
     
     

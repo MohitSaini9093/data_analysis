@@ -131,6 +131,7 @@ def execute_python():
 @app.route('/analysis/<operation>', methods=['POST'])
 def analysis(operation):
     global data_
+    analysis_obj = None
     try:
         data = request.json
         if not data:
@@ -140,14 +141,13 @@ def analysis(operation):
             return jsonify({'error': 'No dataset loaded. Please upload a file first.'}), 400
 
         # Create analysis object with the correct data format
-        analysis_obj = an.Analysis(data_)  # Fixed typo in variable name
+        analysis_obj = an.Analysis(data_)
 
         if operation == 'filter':
             filter_value = data.get('filterValue')
             column_name = data.get('columnName')
             
-            #print(f"Filtering: column={column_name}, value={filter_value}")  # Debug log
-            
+    
             if not filter_value or not column_name:
                 return jsonify({'error': 'Missing filter value or column name'}), 400
                 
@@ -170,7 +170,7 @@ def analysis(operation):
             direction = data.get('direction')
             if not column_name:
                 return jsonify({'error': 'Missing column name'}), 400
-            #print(f"Sorting: column={column_name}, direction={direction}")  # Debug log
+            
             if direction not in ['asc', 'desc']:
                 return jsonify({'error': 'Invalid sort direction. Use "asc" or "desc".'}), 400
             if direction == 'asc':
@@ -199,23 +199,26 @@ def analysis(operation):
                 'data': deleted_df.to_dict(orient='records'),
                 'row_count': len(deleted_df)
             })
-
+        
         
         elif operation == 'describe':
             column_name = data.get('columnName')
             if not column_name:
                 return jsonify({'error': 'Missing column name'}), 400
             describe_ = analysis_obj.describe_column(column_name)
-            print(f"Describing column: {column_name}")
-            print(describe_)
+            
             return jsonify({
                 'describe': describe_
             })
-
-
         
+
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        # Clean up the analysis object
+        if analysis_obj:
+            analysis_obj.cleanup()
 
 
 
