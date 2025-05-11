@@ -285,9 +285,13 @@ result = df
 
         table {
             width: 100%;
-            border-collapse: collapse;
+            /*border-collapse: collapse;*/
+            border-spacing: 0;
             border: 1px solid #3a3a3a;
             background: #1a1a1a;
+        }
+        table :hover {
+            border-color: #06b4d7;
         }
 
         th, td {
@@ -351,7 +355,7 @@ result = df
             z-index: 9999;
             min-width: 180px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            margin-top: 25px;
+            margin-top: 60px;
             left: 0;
             right: auto;
         }

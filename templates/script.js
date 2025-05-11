@@ -639,17 +639,7 @@ document.getElementById('resetData').addEventListener('click', () => {
 # The data is available as a pandas DataFrame in the 'df' variable
 # Store your result in the 'result' variable
 
-# Example: Filter data where column value is greater than 100
-# df = df[df['column_name'] > 100]
-
-# Example: Group by and calculate mean
-# result = df.groupby('category')['value'].mean()
-
-# Example: Sort data
-# result = df.sort_values('column_name', ascending=False)
-
-# Return the modified DataFrame
-result = df
+# result = df
 `);
             }
         } else {
