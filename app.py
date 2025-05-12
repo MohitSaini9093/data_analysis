@@ -35,7 +35,7 @@ def upload_file():
     file = request.files['file']
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
-    print(file.filename)
+    # print(file.filename)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -95,13 +95,13 @@ def execute_python():
     try:
         data = request.json
         code = data.get('code')
-        input_data = data_
+        # input_data = data_
         
-        if not code or not input_data:
+        if not code or not data_:
             return jsonify({'error': 'Missing code or data'}), 400
 
         # Convert input data to DataFrame
-        df = pd.DataFrame(input_data['data'])
+        df = data_
         
         # Create a safe execution environment
         local_vars = {
@@ -116,7 +116,7 @@ def execute_python():
         
         # Get the result
         result_df = local_vars.get('result', df)
-        
+        data_ = result_df
         # Convert result back to JSON format
         result = {
             'columns': result_df.columns.tolist(),

@@ -50,13 +50,18 @@ class Analysis:
         # Handle object/string columns
         elif pd.api.types.is_object_dtype(self.data[column_name]):
             value_counts = self.data[column_name].value_counts()
+            print("Most common values:")
+            print(value_counts.index[0])
             describe = {
                 "count": float(self.data[column_name].count()),
-                "unique_values": float(self.data[column_name].nunique()),
-                "most_common": value_counts.head(5).to_dict(),
-                "least_common": value_counts.tail(5).to_dict(),
+                "no of unique value": float(self.data[column_name].nunique()),
+                "mmost common value": value_counts.index[0],
+                "least common value": value_counts.index[-1],
                 "missing_values": float(self.data[column_name].isna().sum()),
-                "memory_usage": float(self.data[column_name].memory_usage(deep=True))
+                "most common value count": float(value_counts.max()),
+                "least common value count": float(value_counts.min())
+                
+                
             }
         # Handle datetime columns
         elif pd.api.types.is_datetime64_dtype(self.data[column_name]):
@@ -139,8 +144,8 @@ class Analysis:
         if hasattr(self, 'data'):
             del self.data
         # Force garbage collection
-        import gc
-        gc.collect()
+        '''import gc
+        gc.collect()'''
 
     def __del__(self):
         """Destructor to ensure cleanup when object is deleted"""
