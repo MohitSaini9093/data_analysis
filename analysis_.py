@@ -45,7 +45,9 @@ class Analysis:
                 "25%": float(self.data[column_name].quantile(0.25)),
                 "50%": float(self.data[column_name].median()),
                 "75%": float(self.data[column_name].quantile(0.75)),
-                "max": float(self.data[column_name].max())
+                "max": float(self.data[column_name].max()),
+                "Data Type": str(self.data[column_name].dtype),
+                
             }
         # Handle object/string columns
         elif pd.api.types.is_object_dtype(self.data[column_name]):

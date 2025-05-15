@@ -398,7 +398,7 @@ async function describeColumn(columnName) {
                 font-size: 20px;
                 padding: 5px;
                 transition: color 0.3s;
-            ">×</button>
+            ">X</button>
         `;
 
         // Add content
